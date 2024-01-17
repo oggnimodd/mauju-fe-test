@@ -30,7 +30,7 @@
     ]
   },
   "workspaces": [
-    "apps/admin-dashboard",
+    "apps/dashboard",
     "packages/db",
     "packages/api",
     "packages/express-serverless"
