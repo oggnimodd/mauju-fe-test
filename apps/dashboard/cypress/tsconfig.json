@@ -5,9 +5,17 @@
       "section-objects/*": ["./section-objects/*"],
       "page-objects/*": ["./page-objects/*"]
     },
+    "esModuleInterop": true,
+    "jsx": "react",
     "target": "es5",
     "lib": ["es5", "dom"],
     "types": ["cypress", "node"]
   },
-  "include": ["**/*.ts", "**/*.cy.ts", "**/*.spec.ts", "../cypress.d.ts"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cy.ts",
+    "**/*.spec.ts",
+    "../cypress.d.ts"
+  ]
 }
