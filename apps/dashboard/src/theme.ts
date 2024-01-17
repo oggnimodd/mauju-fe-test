@@ -1,4 +1,4 @@
-import { createTheme } from "@mantine/core";
+import { createTheme, Button } from "@mantine/core";
 
 export const theme = createTheme({
   breakpoints: {
@@ -10,4 +10,13 @@ export const theme = createTheme({
   },
   fontFamily: "Poppins, sans-serif",
   headings: { fontFamily: "Poppins, sans-serif" },
+  components: {
+    Button: Button.extend({
+      classNames: {
+        root: "rounded-full h-auto max-h-auto",
+        inner: "p-3",
+        label: "font-base",
+      },
+    }),
+  },
 });

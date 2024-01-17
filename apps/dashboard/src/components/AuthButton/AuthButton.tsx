@@ -9,12 +9,9 @@ const AuthButton: FC<ButtonProps> = ({ className, ...rest }) => {
     <Button
       data-test-id="auth-button"
       {...rest}
-      fullWidth
       className={className}
       classNames={{
-        root: "rounded-full h-auto max-h-auto",
         inner: "py-5",
-        label: "font-base",
       }}
     />
   );
