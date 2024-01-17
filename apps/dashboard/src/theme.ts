@@ -8,4 +8,6 @@ export const theme = createTheme({
     lg: "64em",
     xl: "80em",
   },
+  fontFamily: "Roboto, sans-serif",
+  headings: { fontFamily: "Roboto, sans-serif" },
 });

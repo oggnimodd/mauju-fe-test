@@ -11,6 +11,7 @@ coverage
 # database
 *.sqlite
 *.db
+*.db.journal
 *.sqlite-journal
 
 # next.js
