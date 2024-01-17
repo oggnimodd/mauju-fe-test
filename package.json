@@ -1,0 +1,38 @@
+{
+  "name": "mauju-fe-test",
+  "private": true,
+  "scripts": {
+    "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "prepare": "bun prepare.js",
+    "pre-commit": "bunx lint-staged",
+    "lint": "biome check .",
+    "lint:apply": "biome check --apply .",
+    "format": "biome format .",
+    "format:fix": "biome format --write ."
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "react-hook-form": "^7.49.3",
+    "typescript": "5.2.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.0",
+    "@biomejs/cli-linux-x64": "^1.5.0",
+    "cypress": "13.1.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,jsx,tsx}": [
+      "biome check --apply .",
+      "biome format --write ."
+    ]
+  },
+  "workspaces": [
+    "apps/admin-dashboard",
+    "packages/db",
+    "packages/api",
+    "packages/express-serverless"
+  ]
+}

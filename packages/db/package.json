@@ -1,0 +1,28 @@
+{
+  "name": "@acme/db",
+  "version": "0.1.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "with-env": "dotenv -e ../../.env --",
+    "dev": "bun with-env prisma studio --port 5556",
+    "db-push": "bun with-env prisma db push",
+    "db-generate": "bun with-env prisma generate",
+    "db-clean": "bun delete.ts",
+    "db-migrate": "bun with-env prisma migrate dev",
+    "db-seed": "bun with-env bun seed.ts"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.3.6",
+    "@prisma/adapter-libsql": "^5.5.2",
+    "@prisma/client": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^18.18.3",
+    "dotenv-cli": "^6.0.0",
+    "prisma": "^5.4.1",
+    "typescript": "^4.9.5"
+  }
+}

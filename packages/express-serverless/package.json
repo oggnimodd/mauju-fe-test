@@ -1,0 +1,16 @@
+{
+  "name": "@acme/express-serverless",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "dependencies": {
+    "@clerk/clerk-sdk-node": "^4.12.18",
+    "@trpc/server": "^10.43.0",
+    "@types/cors": "^2.8.15",
+    "@types/express": "^4.17.20",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "superjson": "^2.2.0"
+  }
+}

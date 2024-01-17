@@ -1,0 +1,7 @@
+.container.max-w-6xl.p-4.pt-8 .space-y-3 > div button:has(svg) + div:is(.container.max-w-6xl.p-4.pt-8 .space-y-3 > div > div > div) > div > div {
+  margin-left: 20px !important;
+}
+
+.container.max-w-6xl.p-4.pt-8 .space-y-3 > div button:has(svg) + div:is(.container.max-w-6xl.p-4.pt-8 .space-y-3 > div > div > div) > div{
+  margin-block: 12px !important;
+}
