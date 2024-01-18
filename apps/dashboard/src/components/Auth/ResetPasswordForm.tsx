@@ -81,7 +81,13 @@ const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ setComplete }) => {
       />
 
       {errors.root?.message && (
-        <Alert mt="sm" color="red" icon={<IconAlertTriangle />}>
+        <Alert
+          radius="xl"
+          className="px-8"
+          mt="sm"
+          color="red"
+          icon={<IconAlertTriangle />}
+        >
           {errors.root.message}
         </Alert>
       )}
@@ -90,7 +96,13 @@ const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ setComplete }) => {
       </AuthButton>
 
       {secondFactor && (
-        <Alert mt="sm" color="red" icon={<IconAlertTriangle />}>
+        <Alert
+          radius="xl"
+          mt="sm"
+          color="red"
+          className="px-8"
+          icon={<IconAlertTriangle />}
+        >
           2FA is required, this UI does not handle that
         </Alert>
       )}

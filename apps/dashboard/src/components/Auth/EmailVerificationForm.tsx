@@ -64,7 +64,12 @@ const EmailVerificationForm: FC = () => {
       />
 
       {errors.root?.message && (
-        <Alert color="red" icon={<IconAlertTriangle />}>
+        <Alert
+          radius="xl"
+          color="red"
+          className="px-8"
+          icon={<IconAlertTriangle />}
+        >
           {errors.root.message}
         </Alert>
       )}

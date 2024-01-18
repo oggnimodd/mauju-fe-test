@@ -68,7 +68,12 @@ const ForgotPasswordForm: FC = () => {
           />
 
           {errors.root?.message && (
-            <Alert color="red" icon={<IconAlertTriangle />}>
+            <Alert
+              radius="xl"
+              className="px-8"
+              color="red"
+              icon={<IconAlertTriangle />}
+            >
               {errors.root.message}
             </Alert>
           )}
@@ -79,7 +84,12 @@ const ForgotPasswordForm: FC = () => {
       )}
 
       {complete && (
-        <Alert color="green" icon={<IconAlertTriangle />}>
+        <Alert
+          radius="xl"
+          className="px-8"
+          color="green"
+          icon={<IconAlertTriangle />}
+        >
           You successfully changed your password.{" "}
           <Link to="/login" className="text-green-5 font-semibold">
             Back to login

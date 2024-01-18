@@ -72,7 +72,12 @@ const SignInForm: FC = () => {
       />
 
       {errors.root?.message && (
-        <Alert color="red" icon={<IconAlertTriangle />}>
+        <Alert
+          className="px-8"
+          radius="xl"
+          color="red"
+          icon={<IconAlertTriangle />}
+        >
           {errors.root.message}
         </Alert>
       )}

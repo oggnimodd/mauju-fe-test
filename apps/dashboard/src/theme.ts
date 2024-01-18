@@ -18,10 +18,5 @@ export const theme = createTheme({
         label: "font-base",
       },
     }),
-    Alert: Alert.extend({
-      classNames: {
-        root: "rounded-full px-8",
-      },
-    }),
   },
 });
