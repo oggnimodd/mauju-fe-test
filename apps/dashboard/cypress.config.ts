@@ -17,5 +17,6 @@ export default defineConfig({
       framework: "react",
       bundler: "vite",
     },
+    specPattern: "**/*.{cy,spec}.{js,ts,jsx,tsx}",
   },
 });
