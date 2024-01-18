@@ -11,7 +11,7 @@ const Banner: FC<BannerProps> = ({ className }) => {
     <div
       data-test-id="banner"
       className={clsx(
-        "flex min-h-screen items-center justify-center bg-banner-gradient relative overflow-hidden",
+        "flex min-h-screen items-center justify-center bg-banner-gradient relative overflow-hidden hidden xl:flex",
         className,
       )}
     >
