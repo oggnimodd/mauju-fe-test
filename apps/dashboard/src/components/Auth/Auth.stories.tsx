@@ -6,6 +6,8 @@ import AuthButton from "./AuthButton";
 import AuthTextInput from "./AuthTextInput";
 import { Icon24Hours } from "@tabler/icons-react";
 import AuthPasswordInput from "./AuthPasswordInput";
+import Auth from "./Auth";
+import { Link } from "react-router-dom";
 
 export const SignIn = () => {
   return <SignInForm />;
@@ -36,5 +38,29 @@ export const TextInput = () => {
       <AuthTextInput leftSection={<Icon24Hours />} />
       <AuthPasswordInput leftSection={<Icon24Hours />} />
     </Flex>
+  );
+};
+
+export const AuthComponent = () => {
+  return (
+    <Auth
+      title="Hello Again!"
+      subtitle="Welcome Back"
+      footer={
+        <>
+          <p>
+            Dont have an account?{" "}
+            <Link className="text-blue-8" to="/sign-up">
+              Sign Up
+            </Link>{" "}
+          </p>
+          <Link className="text-blue-8" to="/forgot-password">
+            Forgot Password
+          </Link>{" "}
+        </>
+      }
+    >
+      <SignInForm />
+    </Auth>
   );
 };
