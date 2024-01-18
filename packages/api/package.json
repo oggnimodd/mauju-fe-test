@@ -2,8 +2,8 @@
   "name": "@acme/api",
   "version": "0.1.0",
   "exports": {
-    "./next": "./next",
-    "./node": "./node"
+    "./next": "./next/index.ts",
+    "./node": "./node/index.ts"
   },
   "license": "MIT",
   "type": "module",
