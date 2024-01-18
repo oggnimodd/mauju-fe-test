@@ -18,11 +18,11 @@ const Banner: FC<BannerProps> = ({ className }) => {
       {/* Circles */}
       <div
         data-test-id="banner-circle"
-        className="border-[1%] border-solid border-blue-8/80 w-full aspect-square rounded-full absolute top-[65%] -left-[35%] z-50"
+        className="border border-solid border-blue-8/80 w-2/3 aspect-square rounded-full absolute top-[75%] -left-[25%] z-50"
       />
       <div
         data-test-id="banner-circle"
-        className="border-[1%] border-solid border-blue-8/80 w-full aspect-square rounded-full absolute top-[55%] -left-[55%] z-50"
+        className="border border-solid border-blue-8/80 w-2/3 aspect-square rounded-full absolute top-[70%] -left-[35%] z-50"
       />
 
       {/* Content */}
