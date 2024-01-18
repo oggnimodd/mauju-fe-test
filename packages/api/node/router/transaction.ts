@@ -1,20 +1,49 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { paginationSchema } from "models";
 import { TRPCError } from "@trpc/server";
 import { isAuthorized } from "../middlewares";
+import { Item } from "@acme/db";
 
 export const transactionRouter = createTRPCRouter({
   getAll: protectedProcedure
-    .input(paginationSchema)
+    .input(
+      z.object({
+        limit: z.number(),
+        skip: z.number().optional(),
+        cursor: z.string().nullish(),
+        name: z.string().optional(),
+        filters: z
+          .array(
+            z.object({
+              id: z.string(),
+              value: z.string(),
+            }),
+          )
+          .optional(),
+        filterModes: z.record(z.string()).optional(),
+        sorting: z
+          .array(
+            z.object({
+              id: z.string(),
+              desc: z.boolean(),
+            }),
+          )
+          .optional(),
+      }),
+    )
     .query(async ({ ctx, input }) => {
-      const DEFAULT_SIZE = 10;
+      const { limit, skip, cursor, filters, filterModes, sorting, name } =
+        input;
 
-      const transactions = await ctx.prisma.transaction.findMany({
-        skip: input.skip || 0,
-        take: input.take || DEFAULT_SIZE,
+      const dbData = await ctx.prisma.transaction.findMany({
+        take: limit + 1,
+        skip,
+        cursor: cursor ? { id: cursor } : undefined,
         orderBy: { createdAt: "desc" },
-        where: { userId: ctx.auth.userId },
+        where: {
+          userId: ctx.auth.userId,
+          name: name ? { contains: name } : undefined,
+        },
         include: {
           items: true,
         },
@@ -23,18 +52,72 @@ export const transactionRouter = createTRPCRouter({
       // Authorize
       await isAuthorized({
         ctx,
-        resourceUserId: transactions[0]?.userId as string,
+        resourceUserId: dbData[0]?.userId as string,
       });
 
-      let nextCursor = null;
-      if (transactions.length > (input.take || DEFAULT_SIZE)) {
-        const nextItem = transactions.pop();
+      let nextCursor: typeof cursor | undefined = undefined;
+      if (dbData.length > limit) {
+        const nextItem = dbData.pop(); // return the last item from the array
         nextCursor = nextItem?.id;
       }
 
+      let transactions = dbData as unknown as {
+        id: string;
+        userId: string;
+        total: number;
+        status: string;
+        name: string;
+        items: Item[];
+        createdAt: Date;
+        updatedAt: Date;
+        [key: string]: any;
+      }[];
+
+      // Filtering
+      if (filters?.length) {
+        filters.forEach((filter) => {
+          const { id: columnId, value: filterValue } = filter;
+          const filterMode = filterModes?.[columnId] ?? "contains";
+          transactions = transactions.filter((row) => {
+            const rowValue = row[columnId]?.toString()?.toLowerCase();
+            if (filterMode === "contains") {
+              return rowValue.includes?.((filterValue as string).toLowerCase());
+            }
+            if (filterMode === "startsWith") {
+              return rowValue.startsWith?.(
+                (filterValue as string).toLowerCase(),
+              );
+            }
+            if (filterMode === "endsWith") {
+              return rowValue.endsWith?.((filterValue as string).toLowerCase());
+            }
+          });
+        });
+      }
+
+      // Sorting
+      if (sorting?.length) {
+        const sort = sorting[0];
+        const { id, desc } = sort;
+        transactions.sort((a, b) => {
+          if (desc) {
+            return a[id] < b[id] ? 1 : -1;
+          }
+          return a[id] > b[id] ? 1 : -1;
+        });
+      }
+
+      const totalCount = await ctx.prisma.transaction.count({
+        where: {
+          userId: ctx.auth.userId,
+          name: name ? { contains: name } : undefined,
+        },
+      });
+
       return {
-        items: transactions,
+        items: dbData,
         nextCursor,
+        totalCount,
       };
     }),
   get: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
