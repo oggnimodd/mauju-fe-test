@@ -1,10 +1,11 @@
 import { TransactionTable } from "components";
+import { BaseLayout } from "layouts";
 
 const Home = () => {
   return (
-    <div>
+    <BaseLayout>
       <TransactionTable />
-    </div>
+    </BaseLayout>
   );
 };
 
