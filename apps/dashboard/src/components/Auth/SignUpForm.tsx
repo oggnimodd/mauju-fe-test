@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Alert, PasswordInput, TextInput } from "@mantine/core";
+import { Alert } from "@mantine/core";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useSignUp } from "@clerk/clerk-react";
@@ -12,6 +12,8 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import EmailVerificationForm from "./EmailVerificationForm";
+import AuthTextInput from "./AuthTextInput";
+import AuthPasswordInput from "./AuthPasswordInput";
 
 const signUpSchema = z.object({
   name: z
@@ -68,19 +70,19 @@ const SignUpForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-3">
-      <TextInput
+      <AuthTextInput
         leftSection={<IconUser className="text-gray-3 dark:text-gray-6" />}
         placeholder="Name"
         error={errors.name?.message}
         {...register("name")}
       />
-      <TextInput
+      <AuthTextInput
         error={errors.email?.message}
         leftSection={<IconMail className="text-gray-3 dark:text-gray-6" />}
         placeholder="Email address"
         {...register("email")}
       />
-      <PasswordInput
+      <AuthPasswordInput
         error={errors.password?.message}
         leftSection={<IconLock className="text-gray-3 dark:text-gray-6" />}
         type="password"

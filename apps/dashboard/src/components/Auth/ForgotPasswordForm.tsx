@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Alert, TextInput } from "@mantine/core";
+import { Alert } from "@mantine/core";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useSignIn } from "@clerk/clerk-react";
@@ -8,6 +8,7 @@ import AuthButton from "./AuthButton";
 import { IconMail, IconAlertTriangle } from "@tabler/icons-react";
 import ResetPasswordForm from "./ResetPasswordForm";
 import { Link } from "react-router-dom";
+import AuthTextInput from "./AuthTextInput";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -59,7 +60,7 @@ const ForgotPasswordForm: FC = () => {
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
       {!successfulCreation && !complete && (
         <>
-          <TextInput
+          <AuthTextInput
             leftSection={<IconMail className="text-gray-3 dark:text-gray-6" />}
             placeholder="Email address"
             error={errors.email?.message}

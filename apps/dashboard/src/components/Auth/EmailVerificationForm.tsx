@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Alert, TextInput } from "@mantine/core";
+import { Alert } from "@mantine/core";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useSignUp } from "@clerk/clerk-react";
@@ -7,6 +7,7 @@ import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthButton from "./AuthButton";
 import { IconLock, IconAlertTriangle } from "@tabler/icons-react";
+import AuthTextInput from "./AuthTextInput";
 
 const emailVerificationSchema = z.object({
   verificationCode: z.string(),
@@ -55,7 +56,7 @@ const EmailVerificationForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-3">
-      <TextInput
+      <AuthTextInput
         error={errors.verificationCode?.message}
         leftSection={<IconLock className="text-gray-3 dark:text-gray-6" />}
         placeholder="Verification Code"

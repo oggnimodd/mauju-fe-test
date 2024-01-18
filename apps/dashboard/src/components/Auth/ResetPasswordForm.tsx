@@ -5,7 +5,9 @@ import { useSignIn } from "@clerk/clerk-react";
 import { FC, useState } from "react";
 import AuthButton from "./AuthButton";
 import { IconAlertTriangle, IconLock } from "@tabler/icons-react";
-import { Alert, PasswordInput, TextInput } from "@mantine/core";
+import { Alert } from "@mantine/core";
+import AuthPasswordInput from "./AuthPasswordInput";
+import AuthTextInput from "./AuthTextInput";
 
 const passwordSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters long"),
@@ -63,14 +65,14 @@ const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ setComplete }) => {
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      <PasswordInput
+      <AuthPasswordInput
         leftSection={<IconLock className="text-gray-3 dark:text-gray-6" />}
         type="password"
         placeholder="New Password"
         error={errors.password?.message}
         {...register("password")}
       />
-      <TextInput
+      <AuthTextInput
         leftSection={<IconLock className="text-gray-3 dark:text-gray-6" />}
         type="text"
         placeholder="Reset password code"
