@@ -5,6 +5,7 @@ import cors from "cors";
 import { renderTrpcPanel } from "trpc-panel";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
+import { injectScriptToPanel } from "./panel/injectScriptToPanel";
 
 const PORT = 8080;
 
@@ -19,12 +20,13 @@ app.use(ClerkExpressWithAuth());
 
 app.use("/panel", ({ res }) => {
   res?.setHeader("Content-Type", "text/html");
-  res?.send(
-    renderTrpcPanel(appRouter, {
-      url: `http://localhost:${PORT}/trpc`,
-      transformer: "superjson",
-    }),
-  );
+
+  const panelHtml = renderTrpcPanel(appRouter, {
+    url: process.env.VITE_APP_TRPC_URL || `http://localhost:${PORT}/trpc`,
+    transformer: "superjson",
+  });
+
+  res?.send(injectScriptToPanel(panelHtml));
 });
 
 app.use(
