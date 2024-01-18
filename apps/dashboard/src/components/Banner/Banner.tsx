@@ -44,7 +44,7 @@ const Banner: FC<BannerProps> = ({ className }) => {
           consectetur.
         </Text>
 
-        <Button mt="sm" size="lg" data-test-id="banner-button">
+        <Button mt="sm" size="lg" color="blue.5" data-test-id="banner-button">
           Read More
         </Button>
       </Flex>
