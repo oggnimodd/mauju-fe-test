@@ -6,11 +6,20 @@ import {
   type MRT_ColumnDef,
   type MRT_ColumnFiltersState,
   type MRT_PaginationState,
+  MRT_GlobalFilterTextInput,
+  MRT_ToggleDensePaddingButton,
+  MRT_ToggleFullScreenButton,
+  MRT_ShowHideColumnsButton,
+  MRT_ToggleGlobalFilterButton,
+  MRT_ToolbarAlertBanner,
 } from "mantine-react-table";
 import { Transaction } from "@acme/db";
 import StatusBadge from "./StatusBadge";
 import { STATUS } from "@acme/api/node";
 import TableActions from "./TableActions";
+import { Button, Flex } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { IconTrash } from "@tabler/icons-react";
 
 const formateTableDate = (date: Date) => {
   const day = date.getDate();
@@ -20,6 +29,27 @@ const formateTableDate = (date: Date) => {
 };
 
 const Table: FC = () => {
+  // Api
+  const apiUtils = api.useUtils();
+  const { mutateAsync: deleteMany, isLoading: isDeletingMany } =
+    api.transaction.deleteMany.useMutation({
+      onSuccess: () => {
+        notifications.show({
+          title: "Transaction Deleted",
+          message: "Transaction deleted successfully",
+          color: "green",
+        });
+        apiUtils.transaction.getAll.invalidate();
+      },
+      onError: () => {
+        notifications.show({
+          title: "Transaction Failed",
+          message: "Transaction failed to delete",
+          color: "red",
+        });
+      },
+    });
+
   // Table state
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
     [],
@@ -48,6 +78,7 @@ const Table: FC = () => {
     },
     {
       getNextPageParam: (lastPage) => lastPage.nextCursor,
+      retry: false,
     },
   );
 
@@ -121,6 +152,45 @@ const Table: FC = () => {
     enableColumnFilters: false,
     enableColumnOrdering: false,
     enableSorting: false,
+    renderTopToolbar: ({ table }) => {
+      const handleDeactivate = async () => {
+        const selected = table.getSelectedRowModel().flatRows.map((row) => {
+          return row.original.id;
+        });
+
+        await deleteMany(selected);
+      };
+
+      const disabled = table.getSelectedRowModel().flatRows.length === 0;
+
+      return (
+        <>
+          <MRT_ToolbarAlertBanner table={table} />
+          <Flex p="md" justify="space-between">
+            <Flex gap="xs">
+              {/* import MRT sub-components */}
+              <MRT_GlobalFilterTextInput table={table} />
+              <MRT_ToggleGlobalFilterButton table={table} />
+              <MRT_ShowHideColumnsButton table={table} />
+              <MRT_ToggleDensePaddingButton table={table} />
+              <MRT_ToggleFullScreenButton table={table} />
+            </Flex>
+            <Flex gap={8}>
+              <Button
+                loading={isDeletingMany}
+                leftSection={<IconTrash />}
+                color="red"
+                disabled={disabled}
+                onClick={handleDeactivate}
+                variant="filled"
+              >
+                Delete
+              </Button>
+            </Flex>
+          </Flex>
+        </>
+      );
+    },
   });
 
   return <MantineReactTable table={table} />;

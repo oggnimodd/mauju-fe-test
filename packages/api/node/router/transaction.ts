@@ -49,6 +49,14 @@ export const transactionRouter = createTRPCRouter({
         },
       });
 
+      // Handle empty
+      if (!dbData.length) {
+        return {
+          items: [],
+          nextCursor: null,
+        };
+      }
+
       // Authorize
       await isAuthorized({
         ctx,
@@ -270,6 +278,52 @@ export const transactionRouter = createTRPCRouter({
 
       return {
         message: "Transaction deleted",
+      };
+    }),
+  deleteMany: protectedProcedure
+    .input(z.array(z.string()))
+    .mutation(async ({ ctx, input }) => {
+      const ids = input;
+
+      // Find all transactions to be deleted
+      const transactions = await ctx.prisma.transaction.findMany({
+        where: {
+          id: {
+            in: ids,
+          },
+          userId: ctx.auth.userId,
+        },
+      });
+
+      // Check if all transactions exist and belong to the current user
+      if (transactions.length !== ids.length) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "One or more transactions not found",
+        });
+      }
+
+      // Authorize
+      await Promise.all(
+        transactions.map(async (transaction) => {
+          return await isAuthorized({
+            ctx,
+            resourceUserId: transaction?.userId,
+          });
+        }),
+      );
+
+      // Delete all transactions
+      await ctx.prisma.transaction.deleteMany({
+        where: {
+          id: {
+            in: ids,
+          },
+        },
+      });
+
+      return {
+        message: "Transactions deleted",
       };
     }),
 });
