@@ -1,4 +1,4 @@
-import { Routes as ReactRouterRoutes, Route } from "react-router-dom";
+import { Navigate, Routes as ReactRouterRoutes, Route } from "react-router-dom";
 import {
   HomePage,
   SignInPage,
@@ -7,6 +7,7 @@ import {
   ForgotPasswordPage,
 } from "pages";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
+import { SignedOutOnly } from "components";
 
 interface Page {
   path: string;
@@ -46,6 +47,7 @@ const Routes = () => {
   return (
     <ReactRouterRoutes>
       {routes.map(({ path, component, type }) => {
+        // Public routes
         if (type === "public") {
           return (
             <Route
@@ -56,19 +58,28 @@ const Routes = () => {
           );
         }
 
+        // Only accessible if user is not signed in
         if (type === "unauthenticated") {
           return (
             <Route
-              element={<SignedOut>{component}</SignedOut>}
+              element={<SignedOutOnly>{component}</SignedOutOnly>}
               path={path}
               key={`router-link-${path}`}
             />
           );
         }
 
+        // Only accessible if user is signed in
         return (
           <Route
-            element={<SignedIn>{component}</SignedIn>}
+            element={
+              <>
+                <SignedIn>{component}</SignedIn>
+                <SignedOut>
+                  <Navigate to="/sign-in" replace />
+                </SignedOut>
+              </>
+            }
             path={path}
             key={`router-link-${path}`}
           />
