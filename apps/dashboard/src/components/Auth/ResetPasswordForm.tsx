@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useSignIn } from "@clerk/clerk-react";
 import { FC, useState } from "react";
-import { AuthButton } from "components";
+import AuthButton from "./AuthButton";
 import { IconAlertTriangle, IconLock } from "@tabler/icons-react";
 import { Alert, PasswordInput, TextInput } from "@mantine/core";
 

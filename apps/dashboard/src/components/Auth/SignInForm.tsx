@@ -5,7 +5,7 @@ import { z } from "zod";
 import { useSignIn } from "@clerk/clerk-react";
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthButton } from "components";
+import AuthButton from "./AuthButton";
 import { IconMail, IconLock, IconAlertTriangle } from "@tabler/icons-react";
 
 const schema = z.object({

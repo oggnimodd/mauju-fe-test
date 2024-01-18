@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useSignUp } from "@clerk/clerk-react";
 import { FC, useState } from "react";
-import { AuthButton } from "components";
+import AuthButton from "./AuthButton";
 import {
   IconMail,
   IconLock,
