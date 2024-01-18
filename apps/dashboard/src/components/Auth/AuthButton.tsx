@@ -11,7 +11,7 @@ const AuthButton: FC<ButtonProps> = ({ className, ...rest }) => {
       {...rest}
       className={className}
       classNames={{
-        inner: "py-5",
+        label: "py-2",
       }}
     />
   );
