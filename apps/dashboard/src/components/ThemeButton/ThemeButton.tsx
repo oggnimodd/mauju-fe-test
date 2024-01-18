@@ -7,6 +7,8 @@ interface ThemeButtonProps {
   className?: string;
 }
 
+const THEME_BUTTON_SIZE = 18;
+
 const ThemeButton: FC<ThemeButtonProps> = ({ className }) => {
   const { setColorScheme, colorScheme } = useMantineColorScheme();
   const isDark = colorScheme === "dark";
@@ -18,7 +20,11 @@ const ThemeButton: FC<ThemeButtonProps> = ({ className }) => {
       radius="xl"
       onClick={() => setColorScheme(isDark ? "light" : "dark")}
     >
-      {isDark ? <IconMoonFilled size={20} /> : <IconSun size={20} />}
+      {isDark ? (
+        <IconSun size={THEME_BUTTON_SIZE} />
+      ) : (
+        <IconMoonFilled size={THEME_BUTTON_SIZE} />
+      )}
     </ActionIcon>
   );
 };
