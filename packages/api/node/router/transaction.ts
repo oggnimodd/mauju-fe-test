@@ -63,6 +63,7 @@ export const transactionRouter = createTRPCRouter({
   create: protectedProcedure
     .input(
       z.object({
+        name: z.string(),
         items: z.array(
           z.object({
             name: z.string(),
@@ -85,6 +86,7 @@ export const transactionRouter = createTRPCRouter({
           userId: ctx.auth.userId,
           total: totalPrice,
           status: "PENDING",
+          name: input.name,
           items: {
             create: input.items.map((item) => ({
               ...item,
@@ -100,6 +102,7 @@ export const transactionRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
+        name: z.string().optional(),
         items: z.array(
           z.object({
             id: z.string().optional(),

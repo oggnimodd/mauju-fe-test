@@ -3,6 +3,7 @@ import { prisma } from "./index";
 import type { STATUS } from "../api/models";
 import { v4 as uuidv4 } from "uuid";
 import { Item } from "./index";
+import { faker } from "@faker-js/faker";
 
 const TRANSACTION_STATUS: STATUS[] = ["PENDING", "SUCCESS", "FAILED"];
 
@@ -52,6 +53,7 @@ for (let i = 0; i < NUMBER_OF_TRANSACTIONS; i++) {
   await prisma.transaction.create({
     data: {
       id: uuidv4(),
+      name: faker.lorem.sentence({ min: 5, max: 15 }),
       userId: USER_ID, // replace with actual user id
       total: totalPrice,
       status: randomStatus,
