@@ -1,4 +1,4 @@
-import { createTheme, Button } from "@mantine/core";
+import { createTheme, Button, Alert } from "@mantine/core";
 
 export const theme = createTheme({
   breakpoints: {
@@ -16,6 +16,11 @@ export const theme = createTheme({
         root: "rounded-full h-auto max-h-auto",
         inner: "p-3",
         label: "font-base",
+      },
+    }),
+    Alert: Alert.extend({
+      classNames: {
+        root: "rounded-full px-8",
       },
     }),
   },
