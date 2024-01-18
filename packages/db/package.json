@@ -17,7 +17,9 @@
   "dependencies": {
     "@libsql/client": "^0.3.6",
     "@prisma/adapter-libsql": "^5.5.2",
-    "@prisma/client": "latest"
+    "@prisma/client": "latest",
+    "@types/uuid": "^9.0.7",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.18.3",
