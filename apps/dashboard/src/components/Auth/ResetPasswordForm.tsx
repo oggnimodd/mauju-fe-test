@@ -64,7 +64,7 @@ const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ setComplete }) => {
   if (!isUserLoaded) return null;
 
   return (
-    <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
       <AuthPasswordInput
         leftSection={<IconLock className="text-gray-3 dark:text-gray-6" />}
         type="password"

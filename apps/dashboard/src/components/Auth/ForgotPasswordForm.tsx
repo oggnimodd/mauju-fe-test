@@ -57,7 +57,7 @@ const ForgotPasswordForm: FC = () => {
   }
 
   return (
-    <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
       {!successfulCreation && !complete && (
         <>
           <AuthTextInput
@@ -68,7 +68,7 @@ const ForgotPasswordForm: FC = () => {
           />
 
           {errors.root?.message && (
-            <Alert mt="sm" color="red" icon={<IconAlertTriangle />}>
+            <Alert color="red" icon={<IconAlertTriangle />}>
               {errors.root.message}
             </Alert>
           )}
@@ -79,7 +79,7 @@ const ForgotPasswordForm: FC = () => {
       )}
 
       {complete && (
-        <Alert mt="sm" color="green" icon={<IconAlertTriangle />}>
+        <Alert color="green" icon={<IconAlertTriangle />}>
           You successfully changed your password.{" "}
           <Link to="/login" className="text-green-5 font-semibold">
             Back to login

@@ -69,7 +69,7 @@ const SignUpForm: FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-3">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
       <AuthTextInput
         leftSection={<IconUser className="text-gray-3 dark:text-gray-6" />}
         placeholder="Name"
@@ -91,11 +91,11 @@ const SignUpForm: FC = () => {
       />
 
       {errors.root?.message && (
-        <Alert mt="sm" color="red" icon={<IconAlertTriangle />}>
+        <Alert color="red" icon={<IconAlertTriangle />}>
           {errors.root.message}
         </Alert>
       )}
-      <AuthButton loading={isLoading} fullWidth mt="sm" type="submit">
+      <AuthButton loading={isLoading} fullWidth type="submit">
         Sign Up
       </AuthButton>
     </form>

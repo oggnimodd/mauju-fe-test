@@ -55,7 +55,7 @@ const EmailVerificationForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-3">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
       <AuthTextInput
         error={errors.verificationCode?.message}
         leftSection={<IconLock className="text-gray-3 dark:text-gray-6" />}
@@ -64,11 +64,11 @@ const EmailVerificationForm: FC = () => {
       />
 
       {errors.root?.message && (
-        <Alert mt="sm" color="red" icon={<IconAlertTriangle />}>
+        <Alert color="red" icon={<IconAlertTriangle />}>
           {errors.root.message}
         </Alert>
       )}
-      <AuthButton loading={isLoading} fullWidth mt="sm" type="submit">
+      <AuthButton loading={isLoading} fullWidth type="submit">
         Verify Email
       </AuthButton>
     </form>
