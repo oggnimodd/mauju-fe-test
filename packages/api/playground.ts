@@ -23,7 +23,10 @@ if (process.env.NODE_ENV === "development") {
       transformer: "superjson",
     });
 
-    return injectScriptToPanel(panelHtml);
+    return injectScriptToPanel({
+      html: panelHtml,
+      staticPath: "public",
+    });
   });
 }
 

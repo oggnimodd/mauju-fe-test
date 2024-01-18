@@ -26,7 +26,11 @@ app.use("/panel", ({ res }) => {
     transformer: "superjson",
   });
 
-  res?.send(injectScriptToPanel(panelHtml));
+  res?.send(
+    injectScriptToPanel({
+      html: panelHtml,
+    }),
+  );
 });
 
 app.use(
