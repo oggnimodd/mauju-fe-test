@@ -12,6 +12,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
 // Custom middleware function to check authentication
 app.use(ClerkExpressWithAuth());
