@@ -23,6 +23,7 @@ model Transaction {
 
 model Item {
   id            String      @id @unique @default(uuid())
+  userId        String
   name          String
   description   String?
   quantity      Int
