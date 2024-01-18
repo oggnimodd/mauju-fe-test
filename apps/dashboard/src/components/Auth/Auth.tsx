@@ -11,8 +11,10 @@ interface AuthProps {
 const Auth: FC<AuthProps> = ({ children, title, subtitle, footer }) => {
   return (
     <Flex direction="column" gap={20}>
-      <Title className="text-4xl font-bold text-gray-9">{title}</Title>
-      <Text className="text-lg text-gray-9">{subtitle}</Text>
+      <Title className="text-4xl font-bold text-gray-9 dark:text-white">
+        {title}
+      </Title>
+      <Text className="text-lg text-gray-9 dark:text-white">{subtitle}</Text>
       {children}
       <div className="text-center">{footer}</div>
     </Flex>
