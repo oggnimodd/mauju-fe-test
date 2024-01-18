@@ -13,6 +13,7 @@ datasource db {
 
 model Transaction {
   id        String   @id @unique @default(uuid())
+  name      String
   userId    String
   items     Item[]
   total     Float
