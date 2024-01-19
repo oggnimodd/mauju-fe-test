@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 interface PageHeaderProps {
   title: string;
-  actions: React.ReactNode;
+  actions?: React.ReactNode;
   hideActions?: boolean;
 }
 
