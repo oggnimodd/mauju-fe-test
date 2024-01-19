@@ -78,6 +78,14 @@ cd packages/db && bun run db-seed
 
 The seed will add 100 new transactions to the database with a random number of items.
 
+8. Testing
+
+Not all features and components have been tested yet. To run the tests, create a test account and add the `TEST_EMAIL` and `TEST_PASSWORD` credentials in the `.env` file. Then, execute the following command:
+
+```bash
+cd apps/dashboard && bun run cy:e2e
+```
+
 
 ### Tech stack
 - [React](https://react.dev/) as the UI library.
