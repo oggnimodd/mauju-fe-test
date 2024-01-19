@@ -1,7 +1,9 @@
 import { BaseLayout } from "layouts";
 import { PageHeader, TransactionDetails } from "components";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { api } from "trpc";
+import { Button } from "@mantine/core";
+import { IconEdit } from "@tabler/icons-react";
 
 const DetailsTransaction = () => {
   // Get the transaction ID from the URL
@@ -35,7 +37,19 @@ const DetailsTransaction = () => {
   return (
     <div>
       <BaseLayout>
-        <PageHeader title="Transaction Details" />
+        <PageHeader
+          title="Transaction Details"
+          actions={
+            <Button
+              leftSection={<IconEdit />}
+              component={Link}
+              to={`/transaction/${id}/edit`}
+            >
+              Edit
+            </Button>
+          }
+          includeBackButton
+        />
         <TransactionDetails transaction={transaction} />
       </BaseLayout>
     </div>
