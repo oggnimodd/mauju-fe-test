@@ -156,6 +156,7 @@ export const transactionRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string(),
+        status: statusShema.optional(),
         items: z.array(
           z.object({
             name: z.string(),
@@ -177,7 +178,7 @@ export const transactionRouter = createTRPCRouter({
         data: {
           userId: ctx.auth.userId,
           total: totalPrice,
-          status: "PENDING",
+          status: input.status || "PENDING",
           name: input.name,
           items: {
             create: input.items.map((item) => ({
