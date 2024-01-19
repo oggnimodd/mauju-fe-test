@@ -85,6 +85,7 @@ The seed will add 100 new transactions to the database with a random number of i
 - [Vite](https://vitejs.dev/) as the bundler.
 - [Mantine UI](https://mantine.dev/) for UI components.
 - [Mantine React Table](https://www.mantine-react-table.com/) for tabular data representation.
+- [Tabler Icons](https://tabler.io/icons) for icons.
 - [Tailwind CSS](https://tailwindcss.com/) for styling.
 - [Ladle JS](https://ladle.dev/) for developing components in isolation.
 - [React Query](https://react-query.tanstack.com/) for data fetching.
