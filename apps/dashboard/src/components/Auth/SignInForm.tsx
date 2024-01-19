@@ -76,6 +76,7 @@ const SignInForm: FC = () => {
           className="px-8"
           radius="xl"
           color="red"
+          data-test-id="error-alert"
           icon={<IconAlertTriangle />}
         >
           {errors.root.message}
