@@ -86,6 +86,16 @@ Not all features and components have been tested yet. To run the tests, create a
 cd apps/dashboard && bun run cy:e2e
 ```
 
+for e2e testing
+
+or
+
+```bash
+cd apps/dashboard && bun run cy:component
+```
+
+for component testing
+
 
 ### Tech stack
 - [React](https://react.dev/) as the UI library.
