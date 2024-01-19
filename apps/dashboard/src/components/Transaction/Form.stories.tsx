@@ -7,6 +7,7 @@ export const WithInitialValues = () => (
     onSubmit={(data) => console.log(data)}
     defaultValues={{
       name: "Transaction 1",
+      status: "PENDING",
       items: [
         {
           name: "Item 1",
