@@ -1,5 +1,7 @@
 ## MAUJU FE TEST
 
+### Live demo : https://mauju-fe-test.netlify.app/
+
 ### How to run locally
 
 #### Prerequisites
