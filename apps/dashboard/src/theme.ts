@@ -1,4 +1,4 @@
-import { createTheme, Button, Alert } from "@mantine/core";
+import { createTheme, Button } from "@mantine/core";
 
 export const theme = createTheme({
   breakpoints: {
