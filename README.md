@@ -54,6 +54,8 @@ cd packages/express-serverless && bun run dev:express
 
 With this, you can navigate to `localhost:8080/panel` in your browser to explore the API. The panel uses [trpc-panel](https://github.com/iway1/trpc-panel). On this page, you can create a new account with Clerk and you can sign in and access protected API endpoints.
 
+The source code of this project server/api is located inside the `packages/api/node` folder.
+
 6. Run the dashboard with the following command
 
 ```bash 
