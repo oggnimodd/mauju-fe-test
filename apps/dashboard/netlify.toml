@@ -1,5 +1,5 @@
 [build]
-  functions = "apps/react/netlify/functions"
+  functions = "apps/dashboard/netlify/functions"
 [functions]
   external_node_modules = ["express", "@libsql/client"]
   node_bundler = "esbuild"
@@ -8,10 +8,6 @@
   from = "/api/*"
   status = 200
   to = "/.netlify/functions/api/:splat"
-[[redirects]]
-  from = "/s/*"
-  to = "/.netlify/functions/s/:splat"
-  status = 200
 [[redirects]]
   from = "/*"
   to = "/index.html"
