@@ -89,7 +89,7 @@ const Header: FC = () => {
                   <Menu.Dropdown>
                     <Menu.Item
                       component={Link}
-                      to="/transactions/new"
+                      to="/transaction/new"
                       leftSection={
                         <IconPlus
                           style={{ width: rem(16), height: rem(16) }}
@@ -154,7 +154,7 @@ const Header: FC = () => {
             <CloseIcon />
           </ActionIcon>
 
-          <Link className={mobileHeaderItemClassName} to="/transactions/new">
+          <Link className={mobileHeaderItemClassName} to="/transaction/new">
             <IconPlus
               style={{ width: rem(20), height: rem(20) }}
               stroke={1.6}
