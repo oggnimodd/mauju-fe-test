@@ -1,10 +1,13 @@
 import { Navigate, Routes as ReactRouterRoutes, Route } from "react-router-dom";
 import {
   HomePage,
+  AddTransactionPage,
+  EditTransactionPage,
   SignInPage,
   SignUpPage,
   NotFoundPage,
   ForgotPasswordPage,
+  DetailsTransactionPage,
 } from "pages";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { SignedOutOnly } from "components";
@@ -19,6 +22,21 @@ const routes = [
   {
     path: "/",
     component: <HomePage />,
+    type: "authenticated",
+  },
+  {
+    path: "/transaction/:id",
+    component: <DetailsTransactionPage />,
+    type: "authenticated",
+  },
+  {
+    path: "/transaction/new",
+    component: <AddTransactionPage />,
+    type: "authenticated",
+  },
+  {
+    path: "/transaction/:id/edit",
+    component: <EditTransactionPage />,
     type: "authenticated",
   },
   {
