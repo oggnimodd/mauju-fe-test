@@ -75,3 +75,24 @@ cd packages/db && bun run db-seed
 ```
 
 The seed will add 100 new transactions to the database with a random number of items.
+
+
+### Tech stack
+- [React](https://react.dev/) as the UI library.
+- [TypeScript](https://www.typescriptlang.org/).
+- [Vite](https://vitejs.dev/) as the bundler.
+- [Mantine UI](https://mantine.dev/) for UI components.
+- [Mantine React Table](https://www.mantine-react-table.com/) for tabular data representation.
+- [Tailwind CSS](https://tailwindcss.com/) for styling.
+- [Ladle JS](https://ladle.dev/) for developing components in isolation.
+- [React Query](https://react-query.tanstack.com/) for data fetching.
+- [Bun](https://github.com/lukeed/bundt) as the package manager.
+- [TRPC](https://trpc.io/) for creating type-safe API.
+- [Prisma](https://www.prisma.io/) as the ORM.
+- [Turso](https://github.com/vercel/turso) as the database.
+- [Biome](https://biome.sh/) as the linter and formatter.
+- [TRPC Panel](https://trpc.io/docs/introduction) for managing TRPC procedures.
+- [Clerk](https://clerk.dev/) for authentication.
+- [Cypress](https://www.cypress.io/) for testing.
+- [Netlify Functions](https://www.netlify.com/products/functions/) as the server for production.
+- [Netlify](https://www.netlify.com/) for client deployment.
