@@ -34,7 +34,7 @@ const PageHeader: FC<PageHeaderProps> = ({
             Back
           </Button>
         ) : (
-          <>
+          <Flex gap="sm" align="center" wrap="wrap">
             {actions}
             {includeBackButton && (
               <Button
@@ -46,7 +46,7 @@ const PageHeader: FC<PageHeaderProps> = ({
                 Back
               </Button>
             )}
-          </>
+          </Flex>
         )}
       </div>
     </Flex>
