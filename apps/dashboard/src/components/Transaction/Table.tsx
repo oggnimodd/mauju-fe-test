@@ -79,6 +79,7 @@ const Table: FC = () => {
     {
       getNextPageParam: (lastPage) => lastPage.nextCursor,
       retry: false,
+      refetchOnWindowFocus: false,
     },
   );
 
