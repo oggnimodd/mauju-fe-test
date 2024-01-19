@@ -7,10 +7,16 @@ import clsx from "clsx";
 interface PageHeaderProps {
   title: string;
   actions?: React.ReactNode;
+  includeBackButton?: boolean;
   hideActions?: boolean;
 }
 
-const PageHeader: FC<PageHeaderProps> = ({ title, actions, hideActions }) => {
+const PageHeader: FC<PageHeaderProps> = ({
+  title,
+  actions,
+  hideActions,
+  includeBackButton = false,
+}) => {
   return (
     <Flex align="center" py="lg">
       <Title className="text-2xl font-bold xs:text-3xl" order={2}>
@@ -19,11 +25,28 @@ const PageHeader: FC<PageHeaderProps> = ({ title, actions, hideActions }) => {
 
       <div className={clsx("ml-auto", hideActions && "hidden")}>
         {!actions ? (
-          <Button leftSection={<IconArrowLeft />} component={Link} to="/">
+          <Button
+            leftSection={<IconArrowLeft />}
+            component={Link}
+            to="/"
+            variant="outline"
+          >
             Back
           </Button>
         ) : (
-          actions
+          <>
+            {actions}
+            {includeBackButton && (
+              <Button
+                leftSection={<IconArrowLeft />}
+                component={Link}
+                to="/"
+                variant="outline"
+              >
+                Back
+              </Button>
+            )}
+          </>
         )}
       </div>
     </Flex>
