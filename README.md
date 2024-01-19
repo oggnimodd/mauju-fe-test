@@ -3,7 +3,7 @@
 ### How to run locally
 
 #### Prerequisites
-1. You need [Bun](https://bun.sh/) installed on your machine to run this project. If you don't have Bun, you can use GitPod or GitHub Codespaces to run this project.
+1. You need [Bun](https://bun.sh/) installed on your machine to run this project. If you don't have Bun, you can use [GitPod](https://www.gitpod.io/) or [GitHub Codespaces](https://github.com/features/codespaces) to run this project.
 2. This project uses Clerk as an authentication provider, so you need to create a new project on Clerk, which is free.
 
 
