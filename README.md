@@ -96,3 +96,39 @@ The seed will add 100 new transactions to the database with a random number of i
 - [Cypress](https://www.cypress.io/) for testing.
 - [Netlify Functions](https://www.netlify.com/products/functions/) as the server for production.
 - [Netlify](https://www.netlify.com/) for client deployment.
+
+### Screenshots
+
+- Sign in
+![Sign in](/sc/sign-in.png)
+
+- Sign up
+![Sign up](/sc/sign-up.png)
+
+- Forgot password
+![Forgot password](/sc/forgot-password.png)
+
+- Transaction list
+![Transaction list](/sc/transaction-list.png)
+
+- Sign in
+![Sign in](/sc/sign-in.png)
+
+- Create transaction
+![Create transaction](/sc/create-transaction.png)
+
+- Edit transaction
+![Edit transaction](/sc/edit-transaction.png)
+
+- Search transaction
+![Search transaction](/sc/search-transaction.png)
+
+- Select transaction
+![Select transaction](/sc/select-transaction.png)
+
+- Ladle stories
+![Ladle stories](/sc/ladle.png)
+
+- TRPC panel
+![Trpc Panel](/sc/trpc-panel.png)
+
