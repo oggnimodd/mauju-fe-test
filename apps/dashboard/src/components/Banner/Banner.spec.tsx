@@ -1,6 +1,11 @@
 import Banner from "./Banner";
 
 describe("Banner Component", () => {
+  beforeEach(() => {
+    // Test on large screen
+    cy.viewport(1280, 720);
+  });
+
   it("renders the banner and circles correctly", () => {
     cy.mount(<Banner />);
 
