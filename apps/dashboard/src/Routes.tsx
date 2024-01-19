@@ -8,6 +8,7 @@ import {
   NotFoundPage,
   ForgotPasswordPage,
   DetailsTransactionPage,
+  ProfilePage,
 } from "pages";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { SignedOutOnly } from "components";
@@ -22,6 +23,11 @@ const routes = [
   {
     path: "/",
     component: <HomePage />,
+    type: "authenticated",
+  },
+  {
+    path: "/profile",
+    component: <ProfilePage />,
     type: "authenticated",
   },
   {
