@@ -29,6 +29,8 @@ type TransactionType = z.infer<typeof TransactionSchema>;
 interface TransactionFormProps {
   defaultValues?: TransactionType;
   onSubmit: (data: TransactionType) => void;
+  isLoading?: boolean;
+  errorMessage?: string;
 }
 
 const TransactionForm: FC<TransactionFormProps> = ({
@@ -37,6 +39,8 @@ const TransactionForm: FC<TransactionFormProps> = ({
     items: [],
   },
   onSubmit,
+  isLoading,
+  errorMessage,
 }) => {
   const {
     control,
@@ -54,7 +58,7 @@ const TransactionForm: FC<TransactionFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl">
-      <Flex direction="column" gap="lg">
+      <Flex direction="column" gap="sm">
         <Text c="blue" size="xl" fw="bold">
           Transaction Name
         </Text>
@@ -65,7 +69,7 @@ const TransactionForm: FC<TransactionFormProps> = ({
           rules={{ required: "Transaction name is required." }}
           render={({ field }) => (
             <TextInput
-              mb={"xl"}
+              mb={"lg"}
               placeholder="Enter transaction name"
               {...field}
               error={errors.name?.message}
@@ -151,7 +155,10 @@ const TransactionForm: FC<TransactionFormProps> = ({
         ))}
 
         {errors.items?.root && <Text c="red">{errors.items.root.message}</Text>}
+        {errors.items && <Text c="red">{errors.items.message}</Text>}
       </Flex>
+
+      {errorMessage && <Text c="red">{errorMessage}</Text>}
 
       <Flex justify="flex-end" gap="sm" mt="xl" wrap="wrap">
         <Button
@@ -163,7 +170,11 @@ const TransactionForm: FC<TransactionFormProps> = ({
           Add Item
         </Button>
 
-        <Button leftSection={<IconSend size={18} />} type="submit">
+        <Button
+          loading={isLoading}
+          leftSection={<IconSend size={18} />}
+          type="submit"
+        >
           Submit
         </Button>
       </Flex>
