@@ -12,7 +12,7 @@
     "ladle:preview": "ladle preview",
     "with-env": "dotenv -e ../../.env --",
     "netlify:dev": "NODE_ENV=development VITE_APP_TRPC_URL='http://localhost:8888/api/trpc' bun with-env netlify dev",
-    "cy:e2e": "cypress run --e2e",
+    "cy:e2e": "bun with-env cypress run --e2e",
     "cy:component": "bun with-env cypress run --component",
     "type-check": "tsc --noEmit"
   },

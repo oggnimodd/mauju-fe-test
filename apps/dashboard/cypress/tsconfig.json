@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "section-objects/*": ["./section-objects/*"],
-      "page-objects/*": ["./page-objects/*"]
+      "page-objects/*": ["./page-objects/*"],
+      "trpc": ["../src/trpc/index.ts"]
     },
     "esModuleInterop": true,
     "jsx": "react",
