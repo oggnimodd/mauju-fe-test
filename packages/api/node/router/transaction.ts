@@ -3,6 +3,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
 import { isAuthorized } from "../middlewares";
 import { Item } from "@acme/db";
+import { statusShema } from "../../models";
 
 export const transactionRouter = createTRPCRouter({
   getAll: protectedProcedure
@@ -194,13 +195,15 @@ export const transactionRouter = createTRPCRouter({
       z.object({
         id: z.string(),
         name: z.string().optional(),
+        status: statusShema.optional(),
         items: z.array(
           z.object({
             id: z.string().optional(),
-            name: z.string(),
+            name: z.string().optional(),
             description: z.string().optional(),
             quantity: z.number().optional(),
             price: z.number().optional(),
+            operation: z.enum(["CREATE", "DELETE", "UPDATE"]).optional(),
           }),
         ),
       }),
@@ -227,22 +230,56 @@ export const transactionRouter = createTRPCRouter({
       });
 
       // Calculate total price
-      const totalPrice = input.items.reduce(
-        (total, item) => total + (item.quantity || 1) * (item.price || 0),
-        0,
-      );
+      const totalPrice = input.items
+        .filter((item) => item.operation !== "DELETE")
+        .reduce(
+          (total, item) => total + (item.quantity || 1) * (item.price || 0),
+          0,
+        );
+
+      // Separate items into ADD, UPDATE, DELETE categories
+      // We need to remove the id and operation from the addItems to match the type of the items
+      const addItems = input.items
+        .filter((item) => item.operation === "CREATE")
+        .map((item) => {
+          const { id, operation, ...rest } = item;
+          return rest;
+        });
+      const updateItems = input.items
+        .filter((item) => item.operation === "UPDATE")
+        .map((item) => {
+          const { operation, ...rest } = item;
+          return rest;
+        });
+      const deleteItems = input.items
+        .filter((item) => item.operation === "DELETE")
+        .map((item) => {
+          const { operation, ...rest } = item;
+          return rest;
+        });
 
       // Update the transaction
       const updatedTransaction = await ctx.prisma.transaction.update({
         where: { id: input.id },
         data: {
           total: totalPrice,
-          status: "pending",
+          name: input.name || transaction.name,
+          status: input.status || "PENDING",
+          // Handle ADD, UPDATE, DELETE operations separately
           items: {
-            update: input.items.map((item) => ({
-              where: { id: item.id },
-              data: { ...item, userId: ctx.auth.userId },
+            create: addItems.map((item) => ({
+              ...item,
+              name: item.name || "Item Name",
+              description: item.description || undefined,
+              quantity: item.quantity || 1,
+              price: item.price || 0,
+              userId: ctx.auth.userId,
             })),
+            update: updateItems.map((item) => ({
+              where: { id: item.id },
+              data: { ...item },
+            })),
+            delete: deleteItems.map((item) => ({ id: item.id })),
           },
         },
       });

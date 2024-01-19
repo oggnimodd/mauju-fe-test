@@ -7,24 +7,28 @@ import {
   NumberInput,
   Flex,
   Text,
+  Select,
 } from "@mantine/core";
 import { z } from "zod";
 import { FC } from "react";
 import { IconPlus, IconSend, IconTrash } from "@tabler/icons-react";
+// TODO : use alias import
+import { STATUS, statusShema } from "../../../../../packages/api/models";
 
 const ItemSchema = z.object({
-  name: z.string().min(1).max(50),
+  name: z.string().min(1).max(500),
   description: z.string().min(1).max(200).optional(),
   quantity: z.number().min(1),
   price: z.number().min(0),
 });
 
 const TransactionSchema = z.object({
-  name: z.string().min(1).max(50),
+  name: z.string().min(1).max(500),
   items: z.array(ItemSchema).nonempty("At least one item is required."),
+  status: statusShema,
 });
 
-type TransactionType = z.infer<typeof TransactionSchema>;
+export type TransactionType = z.infer<typeof TransactionSchema>;
 
 interface TransactionFormProps {
   defaultValues?: TransactionType;
@@ -73,6 +77,32 @@ const TransactionForm: FC<TransactionFormProps> = ({
               placeholder="Enter transaction name"
               {...field}
               error={errors.name?.message}
+            />
+          )}
+        />
+      </Flex>
+
+      <Flex direction="column" gap="sm">
+        <Text c="blue" size="xl" fw="bold">
+          Status
+        </Text>
+        <Controller
+          name="status"
+          control={control}
+          defaultValue="PENDING"
+          render={({ field }) => (
+            <Select
+              mb={"lg"}
+              data={
+                [
+                  { value: "PENDING", label: "Pending" },
+                  { value: "SUCCESS", label: "Success" },
+                  { value: "FAILED", label: "Failed" },
+                ] satisfies { value: STATUS; label: string }[]
+              }
+              {...field}
+              required
+              error={errors.status?.message}
             />
           )}
         />
