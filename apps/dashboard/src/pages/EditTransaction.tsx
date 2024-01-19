@@ -108,17 +108,12 @@ const EditTransaction = () => {
   return (
     <BaseLayout>
       <PageHeader title="Edit Transaction" />
-
-      {isLoadingTransaction && <p>Loading...</p>}
-
-      {!isLoadingTransaction && id && (
-        <TransactionForm
-          onSubmit={handleEdit}
-          isLoading={isUpdating}
-          errorMessage={errorUpdating?.message}
-          defaultValues={transaction as unknown as TransactionType}
-        />
-      )}
+      <TransactionForm
+        onSubmit={handleEdit}
+        isLoading={isUpdating}
+        errorMessage={errorUpdating?.message}
+        defaultValues={transaction as unknown as TransactionType}
+      />
     </BaseLayout>
   );
 };
