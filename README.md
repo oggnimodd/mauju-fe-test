@@ -11,7 +11,7 @@
 1. Clone this repository
 
 ```bash 
-git clone git@github.com:oggnimodd/mauju-fe-test.git
+git clone https://github.com/oggnimodd/mauju-fe-test.git
 ```
 
 
