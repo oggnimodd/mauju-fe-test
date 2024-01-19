@@ -166,14 +166,22 @@ const Table: FC = () => {
       return (
         <>
           <MRT_ToolbarAlertBanner table={table} />
-          <Flex p="md" justify="space-between">
-            <Flex gap="xs">
+          <Flex
+            p="md"
+            justify="space-between"
+            wrap="wrap"
+            gap="sm"
+            align="center"
+          >
+            <Flex gap="xs" wrap="wrap">
               {/* import MRT sub-components */}
               <MRT_GlobalFilterTextInput table={table} />
-              <MRT_ToggleGlobalFilterButton table={table} />
-              <MRT_ShowHideColumnsButton table={table} />
-              <MRT_ToggleDensePaddingButton table={table} />
-              <MRT_ToggleFullScreenButton table={table} />
+              <Flex>
+                <MRT_ToggleGlobalFilterButton table={table} />
+                <MRT_ShowHideColumnsButton table={table} />
+                <MRT_ToggleDensePaddingButton table={table} />
+                <MRT_ToggleFullScreenButton table={table} />
+              </Flex>
             </Flex>
             <Flex gap={8}>
               <Button
