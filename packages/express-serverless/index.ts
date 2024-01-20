@@ -15,7 +15,7 @@ app.use(express.json());
 const API_URL = "/api";
 
 // API heartbeat
-app.head(`${API_URL}/heartbeat`, (_req, res) => {
+app.use(`${API_URL}/heartbeat`, (_req, res) => {
   res.status(200).end();
 });
 
@@ -31,5 +31,3 @@ app.use(
 );
 
 export default app;
-
-app.listen(8080);
