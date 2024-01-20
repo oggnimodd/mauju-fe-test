@@ -154,14 +154,22 @@ const Header: FC = () => {
             <CloseIcon />
           </ActionIcon>
 
-          <Link className={mobileHeaderItemClassName} to="/transaction/new">
+          <Link
+            className={mobileHeaderItemClassName}
+            to="/transaction/new"
+            onClick={toggle}
+          >
             <IconPlus
               style={{ width: rem(20), height: rem(20) }}
               stroke={1.6}
             />
             <Text fw={500}>New Transaction</Text>
           </Link>
-          <Link className={mobileHeaderItemClassName} to="/profile">
+          <Link
+            className={mobileHeaderItemClassName}
+            to="/profile"
+            onClick={toggle}
+          >
             <IconUser
               style={{ width: rem(20), height: rem(20) }}
               stroke={1.5}
@@ -171,7 +179,10 @@ const Header: FC = () => {
           <Text
             tabIndex={0}
             className={mobileHeaderItemClassName}
-            onClick={() => setColorScheme(isDark ? "light" : "dark")}
+            onClick={() => {
+              setColorScheme(isDark ? "light" : "dark");
+              toggle();
+            }}
             role="button"
             fw={500}
           >
@@ -184,7 +195,10 @@ const Header: FC = () => {
           <Text
             tabIndex={0}
             className={mobileHeaderItemClassName}
-            onClick={() => signOut()}
+            onClick={() => {
+              signOut();
+              toggle();
+            }}
             role="button"
             fw={500}
           >
