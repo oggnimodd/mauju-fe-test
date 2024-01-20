@@ -12,6 +12,11 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.json());
 
+// Heartbeat
+app.get("/ping", (_req, res) => {
+  res.send("pong");
+});
+
 const API_URL = "/api";
 
 // Custom middleware function to check authentication
