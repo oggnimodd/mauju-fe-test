@@ -12,12 +12,12 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.json());
 
-// Heartbeat
-app.get("/ping", (_req, res) => {
-  res.send("pong");
-});
-
 const API_URL = "/api";
+
+// API heartbeat
+app.head(`${API_URL}/heartbeat`, (_req, res) => {
+  res.status(200).end();
+});
 
 // Custom middleware function to check authentication
 app.use(API_URL, ClerkExpressWithAuth());
@@ -31,3 +31,5 @@ app.use(
 );
 
 export default app;
+
+app.listen(8080);
